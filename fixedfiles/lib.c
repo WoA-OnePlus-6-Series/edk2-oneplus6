@@ -20,7 +20,7 @@ lv_coord_t render_resolve_coord(
 	const char*name
 ){
 	size_t len=0;
-	bool percent=FALSE;
+	bool percent=false;
 	char*val,*end=NULL;
 	lv_coord_t result=0;
 	if(!obj||!name)return 0;
@@ -62,7 +62,7 @@ xml_render_obj*render_lookup_object(
 	const char*name
 ){
 	list*l;
-	if(!render||!name||!name[0])return FALSE;
+	if(!render||!name||!name[0])return NULL;
 	MUTEX_LOCK(render->lock);
 	l=list_search_one(
 		render->objects,
@@ -78,7 +78,7 @@ xml_render_style*render_lookup_style(
 	const char*name
 ){
 	list*l;
-	if(!render||!name||!name[0])return FALSE;
+	if(!render||!name||!name[0])return NULL;
 	MUTEX_LOCK(render->lock);
 	l=list_search_one(
 		render->styles,
@@ -94,7 +94,7 @@ xml_render_code*render_lookup_code(
 	const char*name
 ){
 	list*l;
-	if(!render||!name||!name[0])return FALSE;
+	if(!render||!name||!name[0])return NULL;
 	MUTEX_LOCK(render->lock);
 	l=list_search_one(
 		render->codes,
@@ -110,13 +110,13 @@ bool render_set_content_sstring(
 	const char*content,
 	size_t len
 ){
-	if(!render||!content||len<=0)return FALSE;
+	if(!render||!content||len<=0)return false;
 	MUTEX_LOCK(render->lock);
 	render->length=len;
 	if(!(render->content=malloc(len+1))){
 		tlog_error("allocate for file content failed");
 		MUTEX_UNLOCK(render->lock);
-		return FALSE;
+		return false;
 	}
 	memset(render->content,0,len+1);
 	memcpy(render->content,content,len);
@@ -130,7 +130,7 @@ bool render_set_content_rootfs(
 ){
 	char rpath[PATH_MAX];
 	entry_file*file=NULL;
-	if(!render||!path)return FALSE;
+	if(!render||!path)return false;
 	memset(rpath,0,sizeof(rpath));
 	if(path[0]!='/')strncpy(
 		rpath,
@@ -140,7 +140,7 @@ bool render_set_content_rootfs(
 	strlcat(rpath,path,sizeof(rpath)-1);
 	if(!(file=rootfs_get_assets_file((char*)rpath))){
 		tlog_error("file %s not found in rootfs",path);
-		return FALSE;
+		return false;
 	}
 	return render_set_content_assets(render,file);
 }
