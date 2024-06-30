@@ -198,6 +198,7 @@ then	set -e
 		git submodule init;git submodule update
 		popd
                 cp ${PWD}/assets/header.makefile ${PWD}/edk2/BaseTools/Source/C/Makefiles
+                cp ${PWD}/fixedfiles/stb_c_lexer.h ${PWD}/sdm845Pkg/Library/SimpleInit/libs/stb
 	fi
 	set +e
 fi
