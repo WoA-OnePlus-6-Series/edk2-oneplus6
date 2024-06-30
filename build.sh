@@ -200,6 +200,7 @@ then	set -e
                 cp ${PWD}/assets/header.makefile ${PWD}/edk2/BaseTools/Source/C/Makefiles
                 cp ${PWD}/fixedfiles/stb_c_lexer.h ${PWD}/sdm845Pkg/Library/SimpleInit/libs/stb
                 cp ${PWD}/fixedfiles/lib.c ${PWD}/sdm845Pkg/Library/SimpleInit/src/gui/engine
+                cp ${PWD}/fixedfiles/makebuf.c ${PWD}/sdm845Pkg/Library/SimpleInit/libs/compatible
 	fi
 	set +e
 fi
