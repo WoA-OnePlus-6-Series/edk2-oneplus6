@@ -197,6 +197,7 @@ then	set -e
 		pushd sdm845Pkg/Library/SimpleInit
 		git submodule init;git submodule update
 		popd
+                cp ${PWD}/assets/header.makefile ${PWD}/edk2/BaseTools/Source/C/Makefiles
 	fi
 	set +e
 fi
